@@ -15,6 +15,23 @@ post '/pokemons' do
   redirect "/pokemons/#{@pokemon.id}"
 end
 
+get "/pokemons/:id/edit" do
+  @pokemon = Pokemon.find(params[:id])
+  erb(:"pokemons/edit")
+end
+
+delete '/pokemons/:id' do
+  @pokemon = Pokemon.find(params[:id])
+  @pokemon.destroy
+  redirect("/pokemons")
+end
+
+put '/pokemons/:id' do
+  @pokemon = Pokemon.find(params[:id])
+  @pokemon.update(params[:instructor])
+  redirect("/pokemons/#{@pokemon.id}")
+end
+
 get '/pokemons' do
   @pokemons = Pokemon.all
   erb :"pokemons/index"
