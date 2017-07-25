@@ -6,6 +6,14 @@ require_relative 'db/connection'
 # Load models
 require_relative 'models/pokemon'
 
+get '/pokemons/new' do
+  erb :"pokemons/new"
+end
+
+post '/pokemons' do
+  @pokemon = Pokemon.create(params[:pokemon])
+  redirect "/pokemons/#{@pokemon.id}"
+end
 
 get '/pokemons' do
   @pokemons = Pokemon.all
